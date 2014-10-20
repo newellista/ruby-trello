@@ -12,6 +12,11 @@ module Trello
       def find(id, params = {})
         client.find(:organization, id, params)
       end
+
+      # Returns a list of all Organizations for this user
+      def all
+        client.get("/members/#{Member.find(:me).username}/organizations").json_into(self)
+      end
     end
 
     # Update the fields of an organization.
